@@ -23,11 +23,11 @@ def create_app():
         """ Create all tables """
         db.create_all()
 
-    @app.route("/")
+    @app.route("/") # http://0.0.0.0:5000/
     def hello_world():
         return "Hello World!"
 
-    app.add_url_rule(
+    app.add_url_rule( # http://0.0.0.0:5000/graphql
         '/graphql',
         view_func=GraphQLView.as_view(
             'graphql',
