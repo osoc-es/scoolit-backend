@@ -39,12 +39,21 @@ DROP TABLE IF EXISTS Example;
 CREATE TABLE Example(
     id varchar NOT NULL,
     status varchar NOT NULL,
-    photo file NOT NULL,
     isbn varchar NOT NULL,
     donator varchar NOT NULL,
     reciever varchar NOT NULL,
+    latitude varchar NOT NULL,
+    longitude varchar NOT NULL,
+    city varchar NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (donator) REFERENCES User(id)
-    FOREIGN KEY (reciever) REFERENCES User(id)
+    FOREIGN KEY (donator) REFERENCES User(id),
+    FOREIGN KEY (reciever) REFERENCES User(id),
     FOREIGN KEY (isbn) REFERENCES Book(isbn)
-)
+);
+DROP TABLE IF EXISTS Photo;
+CREATE TABLE Photo(
+    id varchar NOT NULL,
+    example_id varchar NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (example_id) REFERENCES Example(id)
+);
