@@ -1,10 +1,11 @@
 from config import Config
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_graphql import GraphQLView
 from app.schema import schema
 
+from controllers.UserController import UserController
 db = SQLAlchemy()
 
 
@@ -17,17 +18,35 @@ def create_app():
     app.config.from_object((get_environment_config()))
 
     db.init_app(app)
+    
+    userController = UserController(db)
 
-    @app.before_first_request
-    def initialize_database():
-        """ Create all tables """
-        db.create_all()
 
-    @app.route("/") # http://0.0.0.0:5000/
-    def hello_world():
-        return "Hello World!"
+    # BASIC CRUD USER 
+    @app.route("/user/", method)
+    def get_user():
+        try:
+            userId = request.args.get('userId')
+        except:
+            abort(500)
+        user = userController.find_user(userId)
+        if(user == None):
+            abort(400)
+        else:
+            return user
+        
+    
 
-    app.add_url_rule( # http://0.0.0.0:5000/graphql
+    #ERROR HANDLERS
+    @app.errorhandler(404)
+    def not_found(error):
+        return ("Not found",404)
+
+    @app.errorhandler(500)
+    def server_error(error):
+        return("Internal server error", 500)
+
+    app.add_url_rule( # NO TOCAR DE MOMENTO
         '/graphql',
         view_func=GraphQLView.as_view(
             'graphql',
