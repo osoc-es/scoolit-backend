@@ -23,3 +23,17 @@ CREATE TABLE Message (
     FOREIGN KEY (transmitter) references User(id),
     FOREIGN KEY (receiver) references User(id)
 );
+
+DROP TABLE IF EXISTS Book;
+
+CREATE TABLE Book (
+    title varchar NOT NULL,
+    edition varchar NOT NULL,
+    editorial varchar NOT NULL,
+    isbn varchar NOT NULL,
+    subject varchar NOT NULL,
+    entry_date date NOT NULL,
+    total_quantity int,
+    available_quantity int,
+    PRIMARY KEY (isbn)
+);
