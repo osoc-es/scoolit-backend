@@ -23,9 +23,7 @@ CREATE TABLE Message (
     FOREIGN KEY (transmitter) references User(id),
     FOREIGN KEY (receiver) references User(id)
 );
-
-DROP TABLE IF EXISTS Book;
-
+DROP TABLE IS EXISTS Book;
 CREATE TABLE Book (
     title varchar NOT NULL,
     edition varchar NOT NULL,
@@ -37,3 +35,16 @@ CREATE TABLE Book (
     available_quantity int,
     PRIMARY KEY (isbn)
 );
+DROP TABLE IF EXISTS Example;
+CREATE TABLE Example(
+    id varchar NOT NULL,
+    status varchar NOT NULL,
+    photo file NOT NULL,
+    isbn varchar NOT NULL,
+    donator varchar NOT NULL,
+    reciever varchar NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (donator) REFERENCES User(id)
+    FOREIGN KEY (reciever) REFERENCES User(id)
+    FOREIGN KEY (isbn) REFERENCES Book(isbn)
+)
