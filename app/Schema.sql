@@ -26,7 +26,7 @@ CREATE TABLE Message (
 DROP TABLE IS EXISTS Book;
 CREATE TABLE Book (
     title varchar NOT NULL,
-    edition varchar NOT NULL,
+    course varchar NOT NULL,
     editorial varchar NOT NULL,
     isbn varchar NOT NULL,
     subject varchar NOT NULL,
@@ -35,13 +35,13 @@ CREATE TABLE Book (
     available_quantity int,
     PRIMARY KEY (isbn)
 );
-DROP TABLE IF EXISTS Example;
-CREATE TABLE Example(
+DROP TABLE IF EXISTS Sample;
+CREATE TABLE Sample(
     id varchar NOT NULL,
     status varchar NOT NULL,
     isbn varchar NOT NULL,
     donator varchar NOT NULL,
-    reciever varchar NOT NULL,
+    reciever varchar DEFAULT NULL,
     latitude varchar NOT NULL,
     longitude varchar NOT NULL,
     city varchar NOT NULL,
