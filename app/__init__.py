@@ -8,6 +8,12 @@ from app.schema import schema
 from controllers.UserController import UserController
 db = SQLAlchemy()
 
+class User(db.Model):
+    id = db.column('user_id', db.Integer, primary_key=True) 
+    usesrname = db.column(db.String(100))
+    password = db.column(db.String(100))
+    email = db.column(db.String(100))
+    deleted = db.column(db.Boolean)
 
 def create_app():
     app = Flask(__name__)
