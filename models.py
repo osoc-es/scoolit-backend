@@ -1,6 +1,6 @@
 from datetime import datetime
 from config import db, ma
-
+from marshmallow_sqlalchemy import ModelSchema
 
 class Person(db.Model):
     __tablename__ = "person"
@@ -12,7 +12,7 @@ class Person(db.Model):
     )
 
 
-class PersonSchema(ma.SQLAlchemyAutoSchema):
+class PersonSchema(ModelSchema):
     class Meta:
         model = Person
         sqla_session = db.session
