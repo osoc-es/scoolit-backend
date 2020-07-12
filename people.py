@@ -73,8 +73,8 @@ def create(person):
 
         # Create a person instance using the schema and the passed in person
         schema = PersonSchema()
-        new_person = schema.load(person, session=db.session)
-
+        #new_person = schema.load(person, session=db.session)
+        new_person = Person(fname=fname,lname=lname)
         # Add the person to the database
         print(new_person)
         db.session.add(new_person)
