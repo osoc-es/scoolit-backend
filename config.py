@@ -1,19 +1,26 @@
 import os
+import connexion
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-class Config(object):
-    ENV = os.environ['ENV']
-    CSRF_ENABLED = True
-    SECRET_KEY = "this_is_a_secret_key"
+# Create the connexion application instance
+connex_app = connexion.App(__name__, specification_dir=basedir)
 
-    # Database Configuration   
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+# Get the underlying Flask app instance
+app = connex_app.app
 
-class DevelopmentConfig(Config):
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://' + os.environ['DB_USERNAME'] + ':' + os.environ['DB_PASSWORD'] + '@' + os.environ['DB_HOST'] + ":3306/" + os.environ['DB_DATABASE']
+# Build the Sqlite ULR for SqlAlchemy
+db_url = "mysql+pymysql://scoolit:scoolit1@0.0.0.0:3306/scoolit_db"
 
-class ProductionConfig(Config):
-    DEBUG = False
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://' + os.environ['DB_USERNAME'] + ':' + os.environ['DB_PASSWORD'] + '@' + os.environ['DB_HOST'] + ":3306/" + os.environ['DB_DATABASE']
+# Configure the SqlAlchemy part of the app instance
+app.config["SQLALCHEMY_ECHO"] = True
+app.config["SQLALCHEMY_DATABASE_URI"] = db_url
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+# Create the SqlAlchemy db instance
+db = SQLAlchemy(app)
+
+# Initialize Marshmallow
+ma = Marshmallow(app)
