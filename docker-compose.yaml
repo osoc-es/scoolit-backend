@@ -1,0 +1,37 @@
+
+version: "3"
+services:
+
+  server:
+    container_name: scoolit-flask
+    build: .
+    ports: ['5000:5000']
+    volumes: ['.:/usr/src/app']
+    restart: always
+    environment:
+      ENV: DEVELOPMENT
+      DB_USERNAME: scoolit
+      DB_PASSWORD: scoolit1
+      DB_DATABASE: scoolit_db
+      DB_HOST: database
+    links:
+      - database
+
+  database:
+    container_name: scoolit-database
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: scoolit_db
+      MYSQL_USER: scoolit
+      MYSQL_PASSWORD: scoolit1
+      MYSQL_ROOT_PASSWORD: scoolit1
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - flask-db:/var/lib/mysql
+
+volumes:
+  flask-db:
