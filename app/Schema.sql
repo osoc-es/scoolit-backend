@@ -53,7 +53,7 @@ CREATE TABLE Sample(
 DROP TABLE IF EXISTS Photo;
 CREATE TABLE Photo(
     id varchar NOT NULL,
-    example_id varchar NOT NULL,
+    sample_id varchar NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (example_id) REFERENCES Example(id)
+    FOREIGN KEY (example_id) REFERENCES Sample(id)
 );
