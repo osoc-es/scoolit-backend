@@ -99,70 +99,71 @@ def create(book):
         )
 
 
-def update(person_id, person):
+def update(isbn, book):
     """
-    This function updates an existing person in the people structure
-    Throws an error if a person with the name we want to update to
+    This function updates an existing book in the books structure
+    Throws an error if a book with the isbn we want to update to
     already exists in the database.
 
-    :param person_id:   Id of the person to update in the people structure
-    :param person:      person to update
-    :return:            updated person structure
+    :param isbn:   isbn of the book to update in the books structure
+    :param book:      book to update
+    :return:            updated book structure
     """
-    # Get the person requested from the db into session
-    update_person = Person.query.filter(
-        Person.person_id == person_id
+    # Get the book requested from the db into session
+    update_book = Book.query.filter(
+        Book.isbn == isbn
     ).one_or_none()
 
-    # Try to find an existing person with the same name as the update
-    fname = person.get("fname")
-    lname = person.get("lname")
+    # Try to find an existing book with the same isbn as the update
+    isbn = book.get("isbn")
+    title = book.get("title")
 
-    existing_person = (
-        Person.query.filter(Person.fname == fname)
-        .filter(Person.lname == lname)
+    existing_book = (
+        Book.query.filter(Book.isbn == isbn)
+        .filter(Book.title == title)
         .one_or_none()
     )
 
-    # Are we trying to find a person that does not exist?
-    if update_person is None:
+    # Are we trying to find a book that does not exist?
+    if update_book is None:
         abort(
             404,
-            "Person not found for Id: {person_id}".format(person_id=person_id),
+            "Book not found for isbn: {isbn}".format(isbn=isbn),
         )
 
     # Would our update create a duplicate of another person already existing?
     elif (
-        existing_person is not None and existing_person.person_id != person_id
+        existing_book is not None and existing_book.isbn != isbn
     ):
         abort(
             409,
-            "Person {fname} {lname} exists already".format(
-                fname=fname, lname=lname
+            "Book with {isbn} and {title} exists already".format(
+                isbn=isbn, title=title
             ),
         )
 
     # Otherwise go ahead and update!
     else:
 
-        # turn the passed in person into a db object
-        schema = PersonSchema()
-        update = schema.load(person, session=db.session)
+        # turn the passed in book into a db object
+        schema = BookSchema()
+        update = schema.load(book, session=db.session)
 
-        # Set the id to the person we want to update
-        update.person_id = update_person.person_id
+        # Set the quantities to the book we want to update
+        update.total_quantity = update_book.total_quantity + 1
+        update.avaliable_quantity = update_book.avaliable_quantity + 1
 
         # merge the new object into the old and commit it to the db
         db.session.merge(update)
         db.session.commit()
 
-        # return updated person in the response
-        data = schema.dump(update_person)
+        # return updated book in the response
+        data = schema.dump(update_book)
 
         return data, 200
 
 
-def delete(person_id):
+def delete(isbn):
     """
     This function deletes a book from the books structure
 
