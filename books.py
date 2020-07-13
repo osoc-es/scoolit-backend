@@ -164,26 +164,26 @@ def update(person_id, person):
 
 def delete(person_id):
     """
-    This function deletes a person from the people structure
+    This function deletes a book from the books structure
 
-    :param person_id:   Id of the person to delete
+    :param isbn:   isbn of the book to delete
     :return:            200 on successful delete, 404 if not found
     """
     # Get the person requested
-    person = Person.query.filter(Person.person_id == person_id).one_or_none()
+    book = Book.query.filter(Book.isbn == isbn).one_or_none()
 
     # Did we find a person?
-    if person is not None:
-        db.session.delete(person)
+    if book is not None:
+        db.session.delete(book)
         db.session.commit()
         return make_response(
-            "Person {person_id} deleted".format(person_id=person_id), 200
+            "Book {isbn} deleted".format(isbn=isbn), 200
         )
 
     # Otherwise, nope, didn't find that person
     else:
         abort(
             404,
-            "Person not found for Id: {person_id}".format(person_id=person_id),
+            "Book not found for isbn: {isbn}".format(isbn=isbn),
         )
 
