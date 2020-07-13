@@ -47,7 +47,7 @@ def read_one(id):
     else:
         abort(
             404,
-            "User not found for Id: {id}".format(id=id),
+            "User not found for Id: {id}".format(id=id)
         )
 
 
@@ -60,7 +60,6 @@ def create(user):
     :return:        201 on success, 406 on user exists
     """
     username = user.get("username")
-    password = user.get("password")
     email = user.get("email")
 
     existing_user_username = (
@@ -113,12 +112,10 @@ def update(id, user):
     :return:            updated users structure
     """
     # Get the user requested from the db into session
-    update_user = User.query.filter(User.id == id)
-    .one_or_none()
+    update_user = User.query.filter(User.id == id).one_or_none()
 
-    # Try to find an existing user with the same username as the update
+    # Try to find an existing user with the same username or email as the update
     username = user.get("username")
-    password = user.get("password")
     email = user.get("email")
 
     existing_user_username = (
@@ -134,7 +131,7 @@ def update(id, user):
     if update_user is None:
         abort(
             404,
-            "Person not found for Id: {id}".format(id=id),
+            "Person not found for Id: {id}".format(id=id)
         )
 
     # Would our update create a duplicate of another user already existing?
@@ -142,6 +139,7 @@ def update(id, user):
         abort(
             409,
             "Username {username} exists already".format(username=username)
+        )
     
     elif existing_user_email is not None and existing_user_email.id != id:
         abort(
