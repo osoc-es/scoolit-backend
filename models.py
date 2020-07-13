@@ -31,7 +31,7 @@ class Book(db.Model):
                            default=datetime.utcnow,
                            onupdate=datetime.utcnow)
 
-class Bookschema(ma.ModelSchema):
+class BookSchema(ma.ModelSchema):
     class Meta:
         model = Book
         sqla_session = db.session     
@@ -51,7 +51,7 @@ class Sample(db.Model):
         longitude = db.Column(db.String(64))
         city = db.Column(db.String(64))
 
-class Sampleschema(ma.ModelSchema):
+class SampleSchema(ma.ModelSchema):
     class Meta:
         model = Sample
         sqla_session = db.session
@@ -65,7 +65,7 @@ class User(db.Model):
     email = db.Column(db.String(64))
     logic_deleted = db.Column(db.Boolean,Default=False)
 
-class Userschema(ma.ModelSchema):
+class UserSchema(ma.ModelSchema):
     class Meta:
         model = User
         sqla_session = db.session
@@ -77,7 +77,7 @@ class Photo(db.Model):
     sample_id = db.Column(db.String(64),
                             ForeignKey("Sample.id"))
 
-class Photoschema(ma.ModelSchema):
+class PhotoSchema(ma.ModelSchema):
     class Meta:
         model = Photo
         sqla_session = db.session
@@ -95,7 +95,7 @@ class Message(db.Model):
                            default=datetime.utcnow,
                            onupdate=datetime.utcnow)
 
-class Messageschema(ma.ModelSchema):
+class MessageSchema(ma.ModelSchema):
     class Meta:
         model = Message
         sqla_session = db.session
