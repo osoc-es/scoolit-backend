@@ -311,5 +311,239 @@ paths:
                               200:
                                 description: Successfully deleted a user
 
+  /books:
+                                  get:
+                                    operationId: books.read_all
+                                    tags:
+                                      - books
+                                    summary: Read the entire set of books, sorted by title
+                                    description: Read the entire set of books, sorted by title
+                                    responses:
+                                      200:
+                                        description: Successfully read books set operation
+                                        schema:
+                                          type: array
+                                          items:
+                                            properties:
+                                              isbn:
+                                                type: integer
+                                                description: isbn of the book
+                                              title:
+                                                type: string
+                                                description: title of the book
+                                              course:
+                                                type: string
+                                                description: course of the book
+                                              editorial:
+                                                type: string
+                                                description: editorial of the book
+                                              subject:
+                                                type: string
+                                                description: subject of the book
+                                              total_quantity:
+                                                type: integer
+                                                description: total number of books
+                                              avaliable_quantity:
+                                                type: integer
+                                                description: avaliable bumber of books
+                                              timestamp:
+                                                type: string
+                                                description: Creation/update timestamp of the book
+                            
+                                             
+                                  post:
+                                    operationId: books.create
+                                    tags:
+                                      - books
+                                    summary: Create a book
+                                    description: Create a new book
+                                    parameters:
+                                      - name: book
+                                        in: body
+                                        description: book to create
+                                        required: True
+                                        schema:
+                                          type: object
+                                          properties:
+                                            isbn:
+                                                type: integer
+                                                description: isbn of the book
+                                            title:
+                                                type: string
+                                                description: title of the book
+                                            course:
+                                                type: string
+                                                description: course of the book
+                                            editorial:
+                                                type: string
+                                                description: editorial of the book
+                                            subject:
+                                                type: string
+                                                description: subject of the book
+                                            total_quantity:
+                                                type: integer
+                                                description: total number of books
+                                            avaliable_quantity:
+                                                type: integer
+                                                description: avaliable bumber of books
+                            
+                                    responses:
+                                      201:
+                                        description: Successfully created book
+                                        schema:
+                                          properties:
+                                            isbn:
+                                                type: integer
+                                                description: isbn of the book
+                                            title:
+                                                type: string
+                                                description: title of the book
+                                            course:
+                                                type: string
+                                                description: course of the book
+                                            editorial:
+                                                type: string
+                                                description: editorial of the book
+                                            subject:
+                                                type: string
+                                                description: subject of the book
+                                            total_quantity:
+                                                type: integer
+                                                description: total number of books
+                                            avaliable_quantity:
+                                                type: integer
+                                                description: avaliable bumber of books
+                                            timestamp:
+                                                type: string
+                                                description: Creation/update timestamp of the book
+                                                                         
+  /books/{isbn}:
+                                  get:
+                                    operationId: books.read_one
+                                    tags:
+                                      - books
+                                    summary: Read one book
+                                    description: Read one book
+                                    parameters:
+                                      - name: isbn
+                                        in: path
+                                        description: isbn of the book to get
+                                        type: integer
+                                        required: True
+                                    responses:
+                                      200:
+                                        description: Successfully read book from books data operation
+                                        schema:
+                                          type: object
+                                          properties:
+                                            isbn:
+                                                type: string
+                                                description: isbn of the book
+                                            title:
+                                                type: string
+                                                description: title of the book
+                                            course:
+                                                type: string
+                                                description: course of the book
+                                            editorial:
+                                                type: string
+                                                description: editorial of the book
+                                            subject:
+                                                type: string
+                                                description: subject of the book
+                                            total_quantity:
+                                                type: integer
+                                                description: total number of books
+                                            avaliable_quantity:
+                                                type: integer
+                                                description: avaliable bumber of books
+                                            timestamp:
+                                                type: string
+                                                description: Creation/update timestamp of the book
+                              
+                                  put:
+                                    operationId: books.update
+                                    tags:
+                                      - books
+                                    summary: Update a book
+                                    description: Update a book
+                                    parameters:
+                                      - name: isbn
+                                        in: path
+                                        description: isbn the book to update
+                                        type: integer
+                                        required: True
+                                      - name: book
+                                        in: body
+                                        schema:
+                                          type: object
+                                          properties:
+                                            isbn:
+                                                type: string
+                                                description: isbn of the book
+                                            title:
+                                                type: string
+                                                description: title of the book
+                                            course:
+                                                type: string
+                                                description: course of the book
+                                            editorial:
+                                                type: string
+                                                description: editorial of the book
+                                            subject:
+                                                type: string
+                                                description: subject of the book
+                                            total_quantity:
+                                                type: integer
+                                                description: total number of books
+                                            avaliable_quantity:
+                                                type: integer
+                                                description: avaliable bumber of books
+                            
+                                    responses:
+                                      200:
+                                        description: Successfully updated book
+                                        schema:
+                                          properties:
+                                            isbn:
+                                                type: string
+                                                description: isbn of the book
+                                            title:
+                                                type: string
+                                                description: title of the book
+                                            course:
+                                                type: string
+                                                description: course of the book
+                                            editorial:
+                                                type: string
+                                                description: editorial of the book
+                                            subject:
+                                                type: string
+                                                description: subject of the book
+                                            total_quantity:
+                                                type: integer
+                                                description: total number of books
+                                            avaliable_quantity:
+                                                type: integer
+                                                description: avaliable bumber of books
+                                            timestamp:
+                                                type: string
+                                                description: Creation/update timestamp of the book
+                                  delete:
+                                    operationId: books.delete
+                                    tags:
+                                      - books
+                                    summary: Delete a book from the books list
+                                    description: Delete a book
+                                    parameters:
+                                      - name: isbn
+                                        in: path
+                                        type: integer
+                                        description: isbn of the book to delete
+                                        required: true
+                                    responses:
+                                      200:
+                                        description: Successfully deleted a book
+
 
 
