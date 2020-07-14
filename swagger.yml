@@ -165,6 +165,151 @@ paths:
       responses:
         200:
           description: Successfully deleted a person
+  
+  /users:
+            get:
+              operationId: users.read_all
+              tags:
+                - users
+              summary: Read the entire set of users, sorted by username
+              description: Read the entire set of users, sorted by username
+              responses:
+                200:
+                  description: Successfully read users set operation
+                  schema:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: string
+                          description: Id of the user
+                        username:
+                          type: string
+                          description: username of the user
+                        password:
+                          type: string
+                          description: password of the user
+                        logic_deleted:
+                          type: string
+                          description: it defines if it's deleted or not
+        
+            post:
+              operationId: users.create
+              tags:
+                - users
+              summary: Create a user
+              description: Create a new user
+              parameters:
+                - name: user
+                  in: body
+                  description: user to create
+                  required: True
+                  schema:
+                    type: object
+                    properties:
+                      username:
+                        type: string
+                        description: username of user to create
+                      password:
+                        type: string
+                        description: password of user to create
+              responses:
+                201:
+                  description: Successfully created user
+                  schema:
+                    properties:
+                      id:
+                        type: string
+                        description: Id of the user
+                      username:
+                        type: string
+                        description: username of the user
+                      password:
+                        type: string
+                        description: password of the user
+  
+  /users/{id}:
+                          get:
+                            operationId: users.read_one
+                            tags:
+                              - users
+                            summary: Read one user
+                            description: Read one user
+                            parameters:
+                              - name: id
+                                in: path
+                                description: Id of the user to get
+                                type: string
+                                required: True
+                            responses:
+                              200:
+                                description: Successfully read user from users data operation
+                                schema:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                      description: Id of the user
+                                    username:
+                                      type: string
+                                      description: username of the user
+                                    password:
+                                      type: string
+                                      description: password of the user
+                    
+                      
+                          put:
+                            operationId: users.update
+                            tags:
+                              - users
+                            summary: Update a user
+                            description: Update a user
+                            parameters:
+                              - name: id
+                                in: path
+                                description: Id the user to update
+                                type: string
+                                required: True
+                              - name: user
+                                in: body
+                                schema:
+                                  type: object
+                                  properties:
+                                    username:
+                                      type: string
+                                      description: username of the user
+                                    password:
+                                      type: string
+                                      description: password of the user
+                            responses:
+                              200:
+                                description: Successfully updated user
+                                schema:
+                                  properties:
+                                    id:
+                                      type: string
+                                      description: Id of the user in the database
+                                    username:
+                                      type: string
+                                      description: username of the user
+                                    password:
+                                      type: string
+                                      description: password of the user
+                          delete:
+                            operationId: users.delete
+                            tags:
+                              - users
+                            summary: Delete a user from the users list
+                            description: Delete a user
+                            parameters:
+                              - name: id
+                                in: path
+                                type: string
+                                description: Id of the user to delete
+                                required: true
+                            responses:
+                              200:
+                                description: Successfully deleted a user
 
 
 
