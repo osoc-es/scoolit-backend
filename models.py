@@ -89,7 +89,7 @@ class Message(db.Model):
     content = db.Column(db.String(512))
     donator = db.Column(db.String(64),
                             ForeignKey("User.id"))
-    reciever = db.Column(db.String(64),
+    receiver = db.Column(db.String(64),
                              ForeignKey("User.id"))
     send_date = db.Column(db.DateTime,
                            default=datetime.utcnow,

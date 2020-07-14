@@ -93,7 +93,7 @@ def create(photo):
 def update(id, photo):
     """
     This function updates an existing photo in the photos structure
-    Throws an error if a photo with the name we want to update to
+    Throws an error if a photo with the sample_id we want to update to
     already exists in the database.
 
     :param id:   Id of the photo to update in the photos structure
