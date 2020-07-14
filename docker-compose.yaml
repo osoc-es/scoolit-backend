@@ -24,7 +24,7 @@ services:
     environment:
       MYSQL_DATABASE: scoolit_db
       MYSQL_USER: scoolit
-      MYSQL_PASSWORD: scoolit1
+      MYSQL_PASSWORD: scoolit1  
       MYSQL_ROOT_PASSWORD: scoolit1
     ports:
       - '3306:3306'
