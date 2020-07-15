@@ -326,7 +326,7 @@ paths:
             items:
               properties:
                 isbn:
-                  type: integer
+                  type: string
                   description: isbn of the book
                 title:
                   type: string
@@ -366,7 +366,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the book
               title:
                   type: string
@@ -380,12 +380,6 @@ paths:
               subject:
                   type: string
                   description: subject of the book
-              total_quantity:
-                  type: integer
-                  description: total number of books
-              avaliable_quantity:
-                  type: integer
-                  description: avaliable bumber of books
 
       responses:
         201:
@@ -393,7 +387,7 @@ paths:
           schema:
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the book
               title:
                   type: string
@@ -437,7 +431,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the book
               title:
                   type: string
@@ -479,7 +473,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the book
               title:
                   type: string
@@ -506,7 +500,7 @@ paths:
           schema:
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the book
               title:
                   type: string
@@ -561,7 +555,7 @@ paths:
             items:
               properties:
                 isbn:
-                  type: integer
+                  type: string
                   description: isbn of the sample
                 id:
                   type: string
@@ -601,7 +595,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the sample
               id:
                   type: string
@@ -631,7 +625,7 @@ paths:
           schema:
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the sample
               id:
                   type: string
@@ -676,7 +670,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the sample
               id:
                   type: string
@@ -718,7 +712,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the sample
               id:
                   type: string
@@ -748,7 +742,7 @@ paths:
           schema:
             properties:
               isbn:
-                  type: integer
+                  type: string
                   description: isbn of the sample
               id:
                   type: string

@@ -127,4 +127,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-flask_db/*
+scoolit_db/*

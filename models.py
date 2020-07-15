@@ -24,8 +24,8 @@ class Book(db.Model):
     course = db.Column(db.String(64))
     editorial = db.Column(db.String(64))
     subject = db.Column(db.String(64))
-    total_quantity = db.Column(db.Integer)
-    available_quantity = db.Column(db.Integer)
+    total_quantity = db.Column(db.Integer, default=1)
+    available_quantity = db.Column(db.Integer, default=1)
     entry_date = db.Column(db.DateTime,
                            default=datetime.utcnow,
                            onupdate=datetime.utcnow)
@@ -92,3 +92,4 @@ class MessageSchema(ModelSchema):
     class Meta:
         model = Message
         sqla_session = db.session
+

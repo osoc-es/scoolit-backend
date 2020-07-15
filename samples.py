@@ -60,7 +60,7 @@ def create(sample):
     :return:        201 on success, 406 on sample exists
     """
     #Check if the book exists
-    if(books.query(isbn==samples.isbn)):
+    if(Book.query.filter(Book.isbn == sample.isbn).one_or_none() != None):
         # Create a sample instance using the schema and the passed in sample
         schema = SampleSchema()
         new_sample = schema.load(sample, session=db.session)
@@ -72,10 +72,10 @@ def create(sample):
         # Serialize and return the newly created sample in the response
         data = schema.dump(new_sample)
         #Increment the total and available quantity
-        book=books.read_one(sample.isbn)
+        book=Book.read_one(sample.isbn)
         book.total_quantity+=1
         book.available_quantity+=1
-        books.update(sample.isbn,book)
+        Book.update(sample.isbn,book)
 
         return data, 201
     else:

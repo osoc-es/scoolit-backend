@@ -16,7 +16,7 @@ def read_all():
     :return:        json string of list of people
     """
     # Create the list of books from our data ordered by title
-    books = book.query.order_by(book.title).all()
+    books = Book.query.order_by(Book.title).all()
 
     # Serialize the data for the response
     book_schema = BookSchema(many=True)
@@ -64,9 +64,6 @@ def create(book):
     course = book.get("course")
     editorial = book.get("editorial")
     subject = book.get("subject")
-    total_quantity = book.get("total_quantity") #TODO Add default 1 and add AutoIncrement every time a sample it's uploaded
-    avaliable_quantity = book.get("avaliable_quantity") #TODO Add default 0, add 1 every time a sample it's uploaded and remove 1 every time a sample it's requested.
-
 
     existing_book = (
         Book.query.filter(Book.isbn == isbn)
