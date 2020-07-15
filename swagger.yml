@@ -656,7 +656,7 @@ paths:
                   description: city of the sample
               
 
-  /samples/{isbn}:
+  /samples/{id}:
     get:
       operationId: samples.read_one
       tags:
@@ -664,10 +664,10 @@ paths:
       summary: Read one sample
       description: Read one sample
       parameters:
-        - name: isbn
+        - name: id
           in: path
-          description: isbn of the sample to get
-          type: integer
+          description: id of the sample to get
+          type: string
           required: True
       responses:
         200:
@@ -707,10 +707,10 @@ paths:
       summary: Update a sample
       description: Update a sample
       parameters:
-        - name: isbn
+        - name: id
           in: path
-          description: isbn the sample to update
-          type: integer
+          description: id the sample to update
+          type: string
           required: True
         - name: sample
           in: body
@@ -778,10 +778,10 @@ paths:
       summary: Delete a sample from the samples list
       description: Delete a sample
       parameters:
-        - name: isbn
+        - name: id
           in: path
-          type: integer
-          description: isbn of the sample to delete
+          type: string
+          description: id of the sample to delete
           required: true
       responses:
         200:
@@ -883,7 +883,7 @@ paths:
         - name: id
           in: path
           description: id of the message to get
-          type: integer
+          type: string
           required: True
       responses:
         200:
@@ -918,7 +918,7 @@ paths:
         - name: id
           in: path
           description: id the message to update
-          type: integer
+          type: string
           required: True
         - name: message
           in: body
@@ -965,7 +965,7 @@ paths:
       parameters:
         - name: id
           in: path
-          type: integer
+          type: string
           description: id of the message to delete
           required: true
       responses:
