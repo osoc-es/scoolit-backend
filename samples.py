@@ -5,8 +5,8 @@ samples data
 
 from flask import make_response, abort
 from config import db
-from models import Sample, SampleSchema
-
+from models import Sample, SampleSchema, Book
+import books 
 
 def read_all():
     """
@@ -59,7 +59,6 @@ def create(sample):
     :param sample:  sample to create in samples structure
     :return:        201 on success, 406 on sample exists
     """
-
     # Create a sample instance using the schema and the passed in sample
     schema = SampleSchema()
     new_sample = schema.load(sample, session=db.session)
@@ -70,6 +69,11 @@ def create(sample):
 
     # Serialize and return the newly created sample in the response
     data = schema.dump(new_sample)
+    #Increment the total and available quantity
+    book=books.read_one(sample.isbn)
+    book.total_quantity+=1
+    book.available_quantity+=1
+    books.update(sample.isbn,book)
 
     return data, 201
 
@@ -118,6 +122,7 @@ def delete(id):
     :param id:   Id of the sample to delete
     :return:            200 on successful delete, 404 if not found
     """
+    
     # Get the sample requested
     sample = Sample.query.filter(Sample.id == id).one_or_none()
 
@@ -125,6 +130,11 @@ def delete(id):
     if sample is not None:
         db.session.delete(sample)
         db.session.commit()
+        #Decrease the total and available quantity
+        book=books.read_one(sample.isbn)
+        book.total_quantity -= 1 #that's provisional just until we get the centers, and then we have to add a logic delete
+        book.available_quantity -= 1
+        books.update(sample.isbn,book)
         return make_response(
             "Sample {id} deleted".format(id=id), 200
         )

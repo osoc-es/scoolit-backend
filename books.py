@@ -149,10 +149,8 @@ def update(isbn, book):
         schema = BookSchema()
         update = schema.load(book, session=db.session)
 
-        # Set the quantities to the book we want to update
-        update.total_quantity = update_book.total_quantity + 1
-        update.avaliable_quantity = update_book.avaliable_quantity + 1
-
+        # Set the isbn to the book we want to update
+        update.isbn= update_book.isbn
         # merge the new object into the old and commit it to the db
         db.session.merge(update)
         db.session.commit()

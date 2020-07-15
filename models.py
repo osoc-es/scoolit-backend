@@ -25,7 +25,7 @@ class Book(db.Model):
     editorial = db.Column(db.String(64))
     subject = db.Column(db.String(64))
     total_quantity = db.Column(db.Integer)
-    avaliable_quantity = db.Column(db.Integer)
+    available_quantity = db.Column(db.Integer)
     entry_date = db.Column(db.DateTime,
                            default=datetime.utcnow,
                            onupdate=datetime.utcnow)
