@@ -59,23 +59,33 @@ def create(sample):
     :param sample:  sample to create in samples structure
     :return:        201 on success, 406 on sample exists
     """
-    # Create a sample instance using the schema and the passed in sample
-    schema = SampleSchema()
-    new_sample = schema.load(sample, session=db.session)
-    # Add the sample to the database
-    print(new_sample)
-    db.session.add(new_sample)
-    db.session.commit()
+    #Check if the book exists
+    if(books.query(isbn==samples.isbn)):
+        # Create a sample instance using the schema and the passed in sample
+        schema = SampleSchema()
+        new_sample = schema.load(sample, session=db.session)
+        # Add the sample to the database
+        print(new_sample)
+        db.session.add(new_sample)
+        db.session.commit()
 
-    # Serialize and return the newly created sample in the response
-    data = schema.dump(new_sample)
-    #Increment the total and available quantity
-    book=books.read_one(sample.isbn)
-    book.total_quantity+=1
-    book.available_quantity+=1
-    books.update(sample.isbn,book)
+        # Serialize and return the newly created sample in the response
+        data = schema.dump(new_sample)
+        #Increment the total and available quantity
+        book=books.read_one(sample.isbn)
+        book.total_quantity+=1
+        book.available_quantity+=1
+        books.update(sample.isbn,book)
 
-    return data, 201
+        return data, 201
+    else:
+        abort(
+            409,
+            "Book {sample.isbn} doesn't exists already".format(
+                isbn=sample.isbn
+            ),
+        )
+
 
 def update(id, sample):
     """
