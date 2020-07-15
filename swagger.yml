@@ -36,8 +36,8 @@ paths:
                   type: string
                   description: Last name of the person
                 timestamp:
-                  type: string
-                  description: Creation/Update timestamp of the person
+                    type: string
+                    description: Creation/Update timestamp of the person record
 
     post:
       operationId: people.create
@@ -74,8 +74,8 @@ paths:
                 type: string
                 description: Last name of the person
               timestamp:
-                type: string
-                description: Creation/Update timestamp of the person record
+                  type: string
+                  description: Creation/Update timestamp of the person record
 
   /people/{person_id}:
     get:
@@ -106,8 +106,8 @@ paths:
                 type: string
                 description: Last name of the person
               timestamp:
-                type: string
-                description: Creation/Update timestamp of the person record
+                  type: string
+                  description: Creation/Update timestamp of the person record
 
     put:
       operationId: people.update
@@ -146,7 +146,7 @@ paths:
               lname:
                 type: string
                 description: Last name of the person
-              timestamp:
+             timestamp:
                 type: string
                 description: Creation/Update timestamp of the person record
 
@@ -346,9 +346,9 @@ paths:
                 avaliable_quantity:
                   type: integer
                   description: avaliable bumber of books
-                timestamp:
+               entry_date:
                   type: string
-                  description: Creation/update timestamp of the book
+                  description: Creation/update entry_date of the book
 
                 
     post:
@@ -413,9 +413,9 @@ paths:
               avaliable_quantity:
                   type: integer
                   description: avaliable bumber of books
-              timestamp:
+             entry_date:
                   type: string
-                  description: Creation/update timestamp of the book
+                  description: Creation/update entry_date of the book
                                                                          
   /books/{isbn}:
     get:
@@ -457,9 +457,9 @@ paths:
               avaliable_quantity:
                   type: integer
                   description: avaliable bumber of books
-              timestamp:
+             entry_date:
                   type: string
-                  description: Creation/update timestamp of the book
+                  description: Creation/update entry_date of the book
 
     put:
       operationId: books.update
@@ -526,9 +526,9 @@ paths:
               avaliable_quantity:
                   type: integer
                   description: avaliable bumber of books
-              timestamp:
+             entry_date:
                   type: string
-                  description: Creation/update timestamp of the book
+                  description: Creation/update entry_date of the book
     delete:
       operationId: books.delete
       tags:
