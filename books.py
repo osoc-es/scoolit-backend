@@ -64,7 +64,7 @@ def create(book):
     course = book.get("course")
     editorial = book.get("editorial")
     subject = book.get("subject")
-    total_quantity = book.get("total_quantity") #TODO Add default 0 and add AutoIncrement every time a sample it's uploaded
+    total_quantity = book.get("total_quantity") #TODO Add default 1 and add AutoIncrement every time a sample it's uploaded
     avaliable_quantity = book.get("avaliable_quantity") #TODO Add default 0, add 1 every time a sample it's uploaded and remove 1 every time a sample it's requested.
 
 

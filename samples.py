@@ -59,7 +59,12 @@ def create(sample):
     :param sample:  sample to create in samples structure
     :return:        201 on success, 406 on sample exists
     """
-
+    #TODO Add code to increment book.avaible_quantity + 1
+    '''
+        1º Buscar book correspondiente con  sample.isbn
+        2º Añadir book.avaible_quantity += 1
+        3º Llamar a la funcion books.py --> update(sample.isbn, book)
+    '''
     # Create a sample instance using the schema and the passed in sample
     schema = SampleSchema()
     new_sample = schema.load(sample, session=db.session)
@@ -118,6 +123,7 @@ def delete(id):
     :param id:   Id of the sample to delete
     :return:            200 on successful delete, 404 if not found
     """
+    #TODO Same that cerate but deleting -1 
     # Get the sample requested
     sample = Sample.query.filter(Sample.id == id).one_or_none()
 
