@@ -437,7 +437,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: string
+                  type: integer
                   description: isbn of the book
               title:
                   type: string
@@ -479,7 +479,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: string
+                  type: integer
                   description: isbn of the book
               title:
                   type: string
@@ -506,7 +506,7 @@ paths:
           schema:
             properties:
               isbn:
-                  type: string
+                  type: integer
                   description: isbn of the book
               title:
                   type: string
@@ -676,7 +676,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: string
+                  type: integer
                   description: isbn of the sample
               id:
                   type: string
@@ -718,7 +718,7 @@ paths:
             type: object
             properties:
               isbn:
-                  type: string
+                  type: integer
                   description: isbn of the sample
               id:
                   type: string
@@ -748,7 +748,7 @@ paths:
           schema:
             properties:
               isbn:
-                  type: string
+                  type: integer
                   description: isbn of the sample
               id:
                   type: string
