@@ -64,8 +64,8 @@ def create(book):
     course = book.get("course")
     editorial = book.get("editorial")
     subject = book.get("subject")
-    total_quantity = book.get("total_quantity")
-    avaliable_quantity = book.get("avaliable_quantity")
+    total_quantity = book.get("total_quantity") #TODO Add default 0 and add AutoIncrement every time a sample it's uploaded
+    avaliable_quantity = book.get("avaliable_quantity") #TODO Add default 0, add 1 every time a sample it's uploaded and remove 1 every time a sample it's requested.
 
 
     existing_book = (
@@ -133,7 +133,7 @@ def update(isbn, book):
 
     # Would our update create a duplicate of another person already existing?
     elif (
-        existing_book is not None and existing_book.isbn != isbn
+        existing_book is not None and str(existing_book.isbn) != str(isbn)
     ):
         abort(
             409,

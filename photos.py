@@ -119,7 +119,7 @@ def update(id, photo):
         )
 
     # Would our update create a duplicate of another photo already existing?
-    elif existing_photo is not None and existing_photo.id != id:
+    elif existing_photo is not None and int(existing_photo.id) != int(id):
         abort(
             409,
             "Photo {sample_id} exists already".format(sample_id=sample_id)
