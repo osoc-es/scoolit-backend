@@ -36,8 +36,8 @@ paths:
                   type: string
                   description: Last name of the person
                 timestamp:
-                  type: string
-                  description: Creation/Update timestamp of the person
+                    type: string
+                    description: Creation/Update timestamp of the person record
 
     post:
       operationId: people.create
@@ -74,8 +74,8 @@ paths:
                 type: string
                 description: Last name of the person
               timestamp:
-                type: string
-                description: Creation/Update timestamp of the person record
+                  type: string
+                  description: Creation/Update timestamp of the person record
 
   /people/{person_id}:
     get:
@@ -106,8 +106,8 @@ paths:
                 type: string
                 description: Last name of the person
               timestamp:
-                type: string
-                description: Creation/Update timestamp of the person record
+                  type: string
+                  description: Creation/Update timestamp of the person record
 
     put:
       operationId: people.update
@@ -311,5 +311,801 @@ paths:
         200:
           description: Successfully deleted a user
 
+  /books:
+    get:
+      operationId: books.read_all
+      tags:
+        - books
+      summary: Read the entire set of books, sorted by title
+      description: Read the entire set of books, sorted by title
+      responses:
+        200:
+          description: Successfully read books set operation
+          schema:
+            type: array
+            items:
+              properties:
+                isbn:
+                  type: integer
+                  description: isbn of the book
+                title:
+                  type: string
+                  description: title of the book
+                course:
+                  type: string
+                  description: course of the book
+                editorial:
+                  type: string
+                  description: editorial of the book
+                subject:
+                  type: string
+                  description: subject of the book
+                total_quantity:
+                  type: integer
+                  description: total number of books
+                avaliable_quantity:
+                  type: integer
+                  description: avaliable bumber of books
+                entry_date:
+                  type: string
+                  description: Creation/update entry_date of the book
+
+                
+    post:
+      operationId: books.create
+      tags:
+        - books
+      summary: Create a book
+      description: Create a new book
+      parameters:
+        - name: book
+          in: body
+          description: book to create
+          required: True
+          schema:
+            type: object
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the book
+              title:
+                  type: string
+                  description: title of the book
+              course:
+                  type: string
+                  description: course of the book
+              editorial:
+                  type: string
+                  description: editorial of the book
+              subject:
+                  type: string
+                  description: subject of the book
+              total_quantity:
+                  type: integer
+                  description: total number of books
+              avaliable_quantity:
+                  type: integer
+                  description: avaliable bumber of books
+
+      responses:
+        201:
+          description: Successfully created book
+          schema:
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the book
+              title:
+                  type: string
+                  description: title of the book
+              course:
+                  type: string
+                  description: course of the book
+              editorial:
+                  type: string
+                  description: editorial of the book
+              subject:
+                  type: string
+                  description: subject of the book
+              total_quantity:
+                  type: integer
+                  description: total number of books
+              avaliable_quantity:
+                  type: integer
+                  description: avaliable bumber of books
+              entry_date:
+                  type: string
+                  description: Creation/update entry_date of the book
+                                                                         
+  /books/{isbn}:
+    get:
+      operationId: books.read_one
+      tags:
+        - books
+      summary: Read one book
+      description: Read one book
+      parameters:
+        - name: isbn
+          in: path
+          description: isbn of the book to get
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read book from books data operation
+          schema:
+            type: object
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the book
+              title:
+                  type: string
+                  description: title of the book
+              course:
+                  type: string
+                  description: course of the book
+              editorial:
+                  type: string
+                  description: editorial of the book
+              subject:
+                  type: string
+                  description: subject of the book
+              total_quantity:
+                  type: integer
+                  description: total number of books
+              avaliable_quantity:
+                  type: integer
+                  description: avaliable bumber of books
+              entry_date:
+                  type: string
+                  description: Creation/update entry_date of the book
+
+    put:
+      operationId: books.update
+      tags:
+        - books
+      summary: Update a book
+      description: Update a book
+      parameters:
+        - name: isbn
+          in: path
+          description: isbn the book to update
+          type: integer
+          required: True
+        - name: book
+          in: body
+          schema:
+            type: object
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the book
+              title:
+                  type: string
+                  description: title of the book
+              course:
+                  type: string
+                  description: course of the book
+              editorial:
+                  type: string
+                  description: editorial of the book
+              subject:
+                  type: string
+                  description: subject of the book
+              total_quantity:
+                  type: integer
+                  description: total number of books
+              avaliable_quantity:
+                  type: integer
+                  description: avaliable bumber of books
+
+      responses:
+        200:
+          description: Successfully updated book
+          schema:
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the book
+              title:
+                  type: string
+                  description: title of the book
+              course:
+                  type: string
+                  description: course of the book
+              editorial:
+                  type: string
+                  description: editorial of the book
+              subject:
+                  type: string
+                  description: subject of the book
+              total_quantity:
+                  type: integer
+                  description: total number of books
+              avaliable_quantity:
+                  type: integer
+                  description: avaliable bumber of books
+              entry_date:
+                  type: string
+                  description: Creation/update entry_date of the book
+    delete:
+      operationId: books.delete
+      tags:
+        - books
+      summary: Delete a book from the books list
+      description: Delete a book
+      parameters:
+        - name: isbn
+          in: path
+          type: integer
+          description: isbn of the book to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a book
 
 
+  /samples:
+    get:
+      operationId: samples.read_all
+      tags:
+        - samples
+      summary: Read the entire set of samples, sorted by isbn
+      description: Read the entire set of samples, sorted by isbn
+      responses:
+        200:
+          description: Successfully read samples set operation
+          schema:
+            type: array
+            items:
+              properties:
+                isbn:
+                  type: integer
+                  description: isbn of the sample
+                id:
+                  type: string
+                  description: id of the sample
+                status:
+                  type: string
+                  description: status of the sample
+                donator:
+                  type: string
+                  description: donator of the sample
+                reciever:
+                  type: string
+                  description: reciever of the sample
+                latitude:
+                  type: string
+                  description: latitude of samples
+                longitude:
+                  type: string
+                  description: longitude of samples
+                city:
+                  type: string
+                  description: city of the sample
+
+                
+    post:
+      operationId: samples.create
+      tags:
+        - samples
+      summary: Create a sample
+      description: Create a new sample
+      parameters:
+        - name: sample
+          in: body
+          description: sample to create
+          required: True
+          schema:
+            type: object
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the sample
+              id:
+                  type: string
+                  description: id of the sample
+              status:
+                  type: string
+                  description: status of the sample
+              donator:
+                  type: string
+                  description: donator of the sample
+              reciever:
+                  type: string
+                  description: reciever of the sample
+              latitude:
+                  type: integer
+                  description: latitude of samples
+              longitude:
+                  type: integer
+                  description: longitude of samples
+              city:
+                    type: string
+                    description: city of the sample
+
+      responses:
+        201:
+          description: Successfully created sample
+          schema:
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the sample
+              id:
+                  type: string
+                  description: id of the sample
+              status:
+                  type: string
+                  description: status of the sample
+              donator:
+                  type: string
+                  description: donator of the sample
+              reciever:
+                  type: string
+                  description: reciever of the sample
+              latitude:
+                  type: integer
+                  description: latitude of samples
+              longitude:
+                  type: integer
+                  description: longitude of samples
+              city:
+                  type: string
+                  description: city of the sample
+              
+
+  /samples/{id}:
+    get:
+      operationId: samples.read_one
+      tags:
+        - samples
+      summary: Read one sample
+      description: Read one sample
+      parameters:
+        - name: id
+          in: path
+          description: id of the sample to get
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read sample from samples data operation
+          schema:
+            type: object
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the sample
+              id:
+                  type: string
+                  description: id of the sample
+              status:
+                  type: string
+                  description: status of the sample
+              donator:
+                  type: string
+                  description: donator of the sample
+              reciever:
+                  type: string
+                  description: reciever of the sample
+              latitude:
+                  type: integer
+                  description: latitude of samples
+              longitude:
+                  type: integer
+                  description: longitude of samples
+              city:
+                  type: string
+                  description: city of the sample
+
+    put:
+      operationId: samples.update
+      tags:
+        - samples
+      summary: Update a sample
+      description: Update a sample
+      parameters:
+        - name: id
+          in: path
+          description: id the sample to update
+          type: string
+          required: True
+        - name: sample
+          in: body
+          schema:
+            type: object
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the sample
+              id:
+                  type: string
+                  description: id of the sample
+              status:
+                  type: string
+                  description: status of the sample
+              donator:
+                  type: string
+                  description: donator of the sample
+              reciever:
+                  type: string
+                  description: reciever of the sample
+              latitude:
+                  type: integer
+                  description: latitude of samples
+              longitude:
+                  type: integer
+                  description: longitude of samples
+              city:
+                    type: string
+                    description: city of the sample
+
+      responses:
+        200:
+          description: Successfully updated sample
+          schema:
+            properties:
+              isbn:
+                  type: integer
+                  description: isbn of the sample
+              id:
+                  type: string
+                  description: id of the sample
+              status:
+                  type: string
+                  description: status of the sample
+              donator:
+                  type: string
+                  description: donator of the sample
+              reciever:
+                  type: string
+                  description: reciever of the sample
+              latitude:
+                  type: integer
+                  description: latitude of samples
+              longitude:
+                  type: integer
+                  description: longitude of samples
+              city:
+                  type: string
+                  description: city of the sample
+    delete:
+      operationId: samples.delete
+      tags:
+        - samples
+      summary: Delete a sample from the samples list
+      description: Delete a sample
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id of the sample to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a sample
+
+
+  /messages:
+    get:
+      operationId: messages.read_all
+      tags:
+        - messages
+      summary: Read the entire set of messages, sorted by date
+      description: Read the entire set of messages, sorted by date
+      responses:
+        200:
+          description: Successfully read messages set operation
+          schema:
+            type: array
+            items:
+              properties:
+
+                id:
+                  type: string
+                  description: id of the message
+                content:
+                  type: string
+                  description: content of the message
+                donator:
+                  type: string
+                  description: donator of the message
+                reciever:
+                  type: string
+                  description: reciever of the message
+                send_date:
+                    type: string
+                    description: Creation/Update send_date of the message
+
+                
+    post:
+      operationId: messages.create
+      tags:
+        - messages
+      summary: Create a message
+      description: Create a new message
+      parameters:
+        - name: message
+          in: body
+          description: message to create
+          required: True
+          schema:
+            type: object
+            properties:
+
+              id:
+                  type: string
+                  description: id of the message
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+
+
+      responses:
+        201:
+          description: Successfully created message
+          schema:
+            properties:
+
+              id:
+                  type: string
+                  description: id of the message
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+              send_date:
+                    type: string
+                    description: Creation/Update send_date of the message
+              
+
+  /messages/{id}:
+    get:
+      operationId: messages.read_one
+      tags:
+        - messages
+      summary: Read one message
+      description: Read one message
+      parameters:
+        - name: id
+          in: path
+          description: id of the message to get
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read message from messages data operation
+          schema:
+            type: object
+            properties:
+
+              id:
+                  type: string
+                  description: id of the message
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+              send_date:
+                    type: string
+                    description: Creation/Update send_date of the message
+
+    put:
+      operationId: messages.update
+      tags:
+        - messages
+      summary: Update a message
+      description: Update a message
+      parameters:
+        - name: id
+          in: path
+          description: id the message to update
+          type: string
+          required: True
+        - name: message
+          in: body
+          schema:
+            type: object
+            properties:
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+
+      responses:
+        200:
+          description: Successfully updated message
+          schema:
+            properties:
+
+              id:
+                  type: string
+                  description: id of the message
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+              send_date:
+                  type: string
+                  description: Creation/Update send_date of the message
+    delete:
+      operationId: messages.delete
+      tags:
+        - messages
+      summary: Delete a message from the messages list
+      description: Delete a message
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id of the message to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a message
+
+          
+  /photos:
+    get:
+      operationId: photos.read_all
+      tags:
+        - photos
+      summary: Read the entire set of photos, sorted by sample_id
+      description: Read the entire set of photos, sorted by sample_id
+      responses:
+        200:
+          description: Successfully read photos set operation
+          schema:
+            type: array
+            items:
+              properties:
+
+                id:
+                  type: string
+                  description: id of the photo
+                sample_id:
+                  type: string
+                  description: sample_id of the photo
+            
+    post:
+      operationId: photos.create
+      tags:
+        - photos
+      summary: Create a photo
+      description: Create a new photo
+      parameters:
+        - name: photo
+          in: body
+          description: photo to create
+          required: True
+          schema:
+            type: object
+            properties:
+
+              id:
+                  type: string
+                  description: id of the photo
+              sample_id:
+                  type: string
+                  description: sample_id of the photo
+
+
+
+      responses:
+        201:
+          description: Successfully created photo
+          schema:
+            properties:
+
+              id:
+                  type: string
+                  description: id of the photo
+              sample_id:
+                  type: string
+                  description: sample_id of the photo
+
+              
+  /photos/{id}:
+    get:
+      operationId: photos.read_one
+      tags:
+        - photos
+      summary: Read one photo
+      description: Read one photo
+      parameters:
+        - name: id
+          in: path
+          description: id of the photo to get
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read photo from photos data operation
+          schema:
+            type: object
+            properties:
+
+              id:
+                  type: string
+                  description: id of the photo
+              sample_id:
+                  type: string
+                  description: sample_id of the photo
+
+    put:
+      operationId: photos.update
+      tags:
+        - photos
+      summary: update a photo
+      description: update a photo
+      parameters:
+        - name: id
+          in: path
+          description: id the photo to update
+          type: string
+          required: True
+        - name: photo
+          in: body
+          schema:
+            type: object
+            properties:
+              sample_id:
+                  type: string
+                  description: sample_id of the photo
+
+      responses:
+        200:
+          description: Successfully updated photo
+          schema:
+            properties:
+
+              id:
+                  type: string
+                  description: id of the photo
+              sample_id:
+                  type: string
+                  description: sample_id of the photo
+
+    delete:
+      operationId: photos.delete
+      tags:
+        - photos
+      summary: Delete a photo from the photos list
+      description: Delete a photo
+      parameters:
+        - name: id
+          in: path
+          type: string
+          description: id of the photo to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a photo
