@@ -787,3 +787,187 @@ paths:
         200:
           description: Successfully deleted a sample
 
+
+  /messages:
+    get:
+      operationId: messages.read_all
+      tags:
+        - messages
+      summary: Read the entire set of messages, sorted by date
+      description: Read the entire set of messages, sorted by date
+      responses:
+        200:
+          description: Successfully read messages set operation
+          schema:
+            type: array
+            items:
+              properties:
+
+                id:
+                  type: string
+                  description: id of the message
+                content:
+                  type: string
+                  description: content of the message
+                donator:
+                  type: string
+                  description: donator of the message
+                reciever:
+                  type: string
+                  description: reciever of the message
+                send_date:
+                    type: string
+                    description: Creation/Update send_date of the message
+
+                
+    post:
+      operationId: messages.create
+      tags:
+        - messages
+      summary: Create a message
+      description: Create a new message
+      parameters:
+        - name: message
+          in: body
+          description: message to create
+          required: True
+          schema:
+            type: object
+            properties:
+
+              id:
+                  type: string
+                  description: id of the message
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+
+
+      responses:
+        201:
+          description: Successfully created message
+          schema:
+            properties:
+
+              id:
+                  type: string
+                  description: id of the message
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+              send_date:
+                    type: string
+                    description: Creation/Update send_date of the message
+              
+
+  /messages/{id}:
+    get:
+      operationId: messages.read_one
+      tags:
+        - messages
+      summary: Read one message
+      description: Read one message
+      parameters:
+        - name: id
+          in: path
+          description: id of the message to get
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read message from messages data operation
+          schema:
+            type: object
+            properties:
+
+              id:
+                  type: string
+                  description: id of the message
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+              send_date:
+                    type: string
+                    description: Creation/Update send_date of the message
+
+    put:
+      operationId: messages.update
+      tags:
+        - messages
+      summary: Update a message
+      description: Update a message
+      parameters:
+        - name: id
+          in: path
+          description: id the message to update
+          type: integer
+          required: True
+        - name: message
+          in: body
+          schema:
+            type: object
+            properties:
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+
+      responses:
+        200:
+          description: Successfully updated message
+          schema:
+            properties:
+
+              id:
+                  type: string
+                  description: id of the message
+              content:
+                  type: string
+                  description: content of the message
+              donator:
+                  type: string
+                  description: donator of the message
+              reciever:
+                  type: string
+                  description: reciever of the message
+              send_date:
+                  type: string
+                  description: Creation/Update send_date of the message
+    delete:
+      operationId: messages.delete
+      tags:
+        - messages
+      summary: Delete a message from the messages list
+      description: Delete a message
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          description: id of the message to delete
+          required: true
+      responses:
+        200:
+          description: Successfully deleted a message
