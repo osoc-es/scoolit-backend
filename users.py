@@ -135,16 +135,16 @@ def update(id, user):
         )
 
     # Would our update create a duplicate of another user already existing?
-    elif existing_user_username is not None and existing_user_username.id != id:
+    elif existing_user_username is not None and int(existing_user_username.id) != int(id):
         abort(
             409,
             "Username {username} exists already".format(username=username)
         )
     
-    elif existing_user_email is not None and existing_user_email.id != id:
+    elif existing_user_email is not None and int(existing_user_email.id) != int(id):
         abort(
             409,
-            "Email {email} exists already".format(email=email)
+            "Email {email} exists already for user: {user} ID:{id}".format(email=email, user=existing_user_email.id, id=id)
         )
 
     # Otherwise go ahead and update!

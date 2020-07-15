@@ -12,7 +12,7 @@ connex_app = connexion.App(__name__, specification_dir=basedir)
 app = connex_app.app
 
 # Build the Sqlite ULR for SqlAlchemy
-db_url = "mysql+pymysql://scoolit:scoolit1@0.0.0.0:3306/scoolit_db"
+db_url = "mysql+pymysql://scoolit:scoolit1@127.0.0.1:3306/scoolit_db"
 
 # Configure the SqlAlchemy part of the app instance
 app.config["SQLALCHEMY_ECHO"] = True
@@ -21,6 +21,5 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Create the SqlAlchemy db instance
 db = SQLAlchemy(app)
-
 # Initialize Marshmallow
 ma = Marshmallow(app)

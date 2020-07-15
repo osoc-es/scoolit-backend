@@ -19,8 +19,7 @@ class PersonSchema(ModelSchema):
 
 class Book(db.Model):
     __tablename__="Book"
-    isbn= db.Column(db.Integer,
-                    primary_key=True)
+    isbn = db.Column(db.String(64), primary_key=True)
     title = db.Column(db.String(64))
     course = db.Column(db.String(64))
     editorial = db.Column(db.String(64))
@@ -31,73 +30,65 @@ class Book(db.Model):
                            default=datetime.utcnow,
                            onupdate=datetime.utcnow)
 
-class BookSchema(ma.ModelSchema):
+class BookSchema(ModelSchema):
     class Meta:
         model = Book
         sqla_session = db.session     
 
 class Sample(db.Model):
         __tablename__="Sample"
-        id = db.Column(db.String(15),
-                       primary_key=True)
+        id = db.Column(db.Integer, primary_key=True)
         status = db.Column(db.String(64))
-        isbn = db.Column(db.Integer,
-                         ForeignKey("Book.isbn"))
-        donator = db.Column(db.String(64),
-                            ForeignKey("User.id"))
-        reciever = db.Column(db.String(64),
-                             ForeignKey("User.id"),nullable=True)
+        isbn = db.Column(db.String(64),
+                         db.ForeignKey("Book.isbn"))
+        donator = db.Column(db.Integer,db.ForeignKey("User.id"))
+        receiver = db.Column(db.Integer,db.ForeignKey("User.id"),nullable=True)
         latitude = db.Column(db.String(64))
         longitude = db.Column(db.String(64))
         city = db.Column(db.String(64))
 
-class SampleSchema(ma.ModelSchema):
+class SampleSchema(ModelSchema):
     class Meta:
         model = Sample
         sqla_session = db.session
       
 class User(db.Model):
     __tablename__="User"
-    id = db.Column(db.String(15),
-                       primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64))
     password = db.Column(db.String(64))
     email = db.Column(db.String(64))
-    logic_deleted = db.Column(db.Boolean,Default=False)
+    logic_deleted = db.Column(db.Boolean,default=False)
 
-class UserSchema(ma.ModelSchema):
+class UserSchema(ModelSchema):
     class Meta:
         model = User
         sqla_session = db.session
      
 class Photo(db.Model):
     __tablename__="Photo"
-    id = db.Column(db.String(15),
-                       primary_key=True)
-    sample_id = db.Column(db.String(64),
-                            ForeignKey("Sample.id"))
+    id = db.Column(db.Integer, primary_key=True)
+    sample_id = db.Column(db.Integer,
+                            db.ForeignKey("Sample.id"))
 
-class PhotoSchema(ma.ModelSchema):
+class PhotoSchema(ModelSchema):
     class Meta:
         model = Photo
         sqla_session = db.session
  
 class Message(db.Model):
     __tablename__="Message"
-    id = db.Column(db.String(15),
-                       primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(512))
-    donator = db.Column(db.String(64),
-                            ForeignKey("User.id"))
-    receiver = db.Column(db.String(64),
-                             ForeignKey("User.id"))
+    donator = db.Column(db.Integer,
+                            db.ForeignKey("User.id"))
+    receiver = db.Column(db.Integer,
+                             db.ForeignKey("User.id"))
     send_date = db.Column(db.DateTime,
                            default=datetime.utcnow,
                            onupdate=datetime.utcnow)
 
-class MessageSchema(ma.ModelSchema):
+class MessageSchema(ModelSchema):
     class Meta:
         model = Message
         sqla_session = db.session
-        
-    

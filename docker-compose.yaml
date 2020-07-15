@@ -31,7 +31,7 @@ services:
     expose:
       - '3306'
     volumes:
-      - flask-db:/var/lib/mysql
+      - ./flask_db:/var/lib/mysql
 
 volumes:
   flask-db:

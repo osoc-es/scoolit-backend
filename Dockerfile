@@ -17,4 +17,4 @@ COPY . /usr/src/app
 EXPOSE 5000
 
 # Run the Flask application
-CMD ["python", "manage.py", "runserver"]
+CMD ["python", "server.py"]
